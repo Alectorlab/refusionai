@@ -24,7 +24,7 @@ function PrivateRoute({ children }) {
 }
 
 PrivateRoute.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
 }
 
 function OpenRoutes({ children }) {
@@ -34,7 +34,7 @@ function OpenRoutes({ children }) {
 }
 
 OpenRoutes.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
 }
 
 const LoginRoute = {
@@ -43,7 +43,7 @@ const LoginRoute = {
         <OpenRoutes>
             <LoginView />
         </OpenRoutes>
-    ),
+    )
 }
 
 const SignupRoute = {
@@ -52,7 +52,7 @@ const SignupRoute = {
         <OpenRoutes>
             <SignupView />
         </OpenRoutes>
-    ),
+    )
 }
 
 // ==============================|| ROUTING RENDER ||============================== //
