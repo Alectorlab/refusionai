@@ -56,7 +56,7 @@ export default function LoginView() {
                     <TextField margin='normal' required fullWidth id='email' label='Email Address' name='email' autoComplete='email' />
                     <TextField
                         margin='normal'
-                        required 
+                        required
                         fullWidth
                         name='password'
                         label='Password'
