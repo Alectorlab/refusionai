@@ -166,7 +166,7 @@ $darkTextSecondary: #8492c4;
     darkSecondary800: $darkSecondary800;
 
     // transparent
-    transparent: $transparent;
+    $transparent: #ffffff00;
 }
 
 // ==============================|| JAVASCRIPT ||============================== //
@@ -248,4 +248,7 @@ $darkTextSecondary: #8492c4;
     darkSecondaryDark: $darkSecondaryDark;
     darkSecondary200: $darkSecondary200;
     darkSecondary800: $darkSecondary800;
+
+    // transparent
+    transparent: $transparent;
 }
