@@ -47,8 +47,26 @@ export default function SignupView() {
                 </Typography>
                 <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField margin='normal' required fullWidth id='email' label='Email Address' name='email' autoComplete='email' />
-                    <TextField margin='normal' required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
-                    <TextField margin='normal' required fullWidth name='password' label='Confirm Password' type='password' id='password' autoComplete='current-password' />
+                    <TextField 
+                        margin='normal' 
+                        required 
+                        fullWidth 
+                        name='password' 
+                        label='Password' 
+                        type='password' 
+                        id='password' 
+                        autoComplete='current-password'
+                        />
+                    <TextField 
+                        margin='normal' 
+                        required 
+                        fullWidth 
+                        name='password' 
+                        label='Confirm Password' 
+                        type='password' 
+                        id='password' 
+                        autoComplete='current-password' 
+                        />
                     <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
                     {error && (
                         <Alert style={{ color: 'red' }} variant='danger'>
