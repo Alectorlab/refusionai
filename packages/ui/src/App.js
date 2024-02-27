@@ -11,6 +11,8 @@ import themes from 'themes'
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll'
+import { UserAuthContextProvider } from 'context/UserAuthContext'
+
 
 // ==============================|| APP ||============================== //
 
@@ -18,14 +20,16 @@ const App = () => {
     const customization = useSelector((state) => state.customization)
 
     return (
-        <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={themes(customization)}>
-                <CssBaseline />
-                <NavigationScroll>
-                    <Routes />
-                </NavigationScroll>
-            </ThemeProvider>
-        </StyledEngineProvider>
+        <UserAuthContextProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={themes(customization)}>
+                    <CssBaseline />
+                    <NavigationScroll>
+                        <Routes />
+                    </NavigationScroll>
+                </ThemeProvider>
+            </StyledEngineProvider>
+        </UserAuthContextProvider>
     )
 }
 
