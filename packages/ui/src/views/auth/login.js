@@ -53,7 +53,7 @@ export default function LoginView() {
                 }}
             >
                 <Typography component="h1" variant="h1">
-                    Login in
+                    Refusion AI Login
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField

@@ -93,7 +93,7 @@ export default function SignupView() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Sign Up
+                        Refusion AI Sign Up
                     </Button>
                     <Grid container>
                         <Grid item>
