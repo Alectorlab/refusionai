@@ -12,8 +12,6 @@ import themes from 'themes'
 // project imports
 import NavigationScroll from 'layout/NavigationScroll'
 import { UserAuthContextProvider } from 'context/UserAuthContext'
-
-
 // ==============================|| APP ||============================== //
 
 const App = () => {
