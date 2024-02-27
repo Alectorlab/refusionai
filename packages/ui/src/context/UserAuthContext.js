@@ -33,7 +33,6 @@ export function UserAuthContextProvider({ children }) {
     function onLoginHandler() {
         setIsAuth(true)
         JSON.stringify(localStorage.setItem('isAuthenticated', true))
-
     }
 
     function onLogoutHandler() {
@@ -54,7 +53,7 @@ export function UserAuthContextProvider({ children }) {
     }, [])
 
     return (
-        <userAuthContext.Provider value={{ user, logIn, signUp, logOut, googleSignIn, onLogoutHandler, isAuth, onLoginHandler }} >
+        <userAuthContext.Provider value={{ user, logIn, signUp, logOut, googleSignIn, onLogoutHandler, isAuth, onLoginHandler }}>
             {children}
         </userAuthContext.Provider>
     )

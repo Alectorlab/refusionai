@@ -16,7 +16,6 @@ const LoginView = Loadable(lazy(() => import('../views/auth/login')))
 
 // ==============================|| LOGIN ROUTE ||============================== //
 
-
 function PrivateRoute({ children }) {
     const { isAuth } = useUserAuth()
     const auth = isAuth
@@ -31,9 +30,10 @@ function OpenRoutes({ children }) {
 
 const LoginRoute = {
     path: '/login',
-    element: <OpenRoutes><LoginView /></OpenRoutes>,
+    element: <OpenRoutes>
+        <LoginView />
+    </OpenRoutes>,
 }
-
 
 const SignupRoute = {
     path: '/signup',
@@ -49,7 +49,7 @@ export default function ThemeRoutes() {
             LoginRoute,
             {
                 element: <PrivateRoute>{MainRoutes.element}</PrivateRoute>,
-                children: MainRoutes.children,
+                children: MainRoutes.children
             },
             CanvasRoutes,
             ChatbotRoutes

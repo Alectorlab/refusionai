@@ -6,16 +6,14 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { useNavigate, } from 'react-router'
+import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useUserAuth } from 'context/UserAuthContext'
 import { Alert } from 'react-bootstrap'
 import { useState } from 'react'
 
-
 export default function LoginView() {
     const { logIn, onLoginHandler } = useUserAuth()
-
 
     const [error, setError] = useState('')
     const navigate = useNavigate()
@@ -25,7 +23,7 @@ export default function LoginView() {
         const data = new FormData(event.currentTarget)
         console.log({
             email: data.get('email'),
-            password: data.get('password'),
+            password: data.get('password')
         })
         setError('')
         try {
@@ -36,7 +34,6 @@ export default function LoginView() {
             setError(err.message)
         }
     }
-
 
     return (
         <Container component='main' maxWidth='sm'>
@@ -49,8 +46,9 @@ export default function LoginView() {
                     marginTop: 8,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                }}>
+                    alignItems: 'center'
+                }}
+                    >
 
                 <Typography component='h1' variant='h1'>
                     Refusion AI Login
@@ -62,7 +60,7 @@ export default function LoginView() {
 
                     {error && <Alert style={{ color: 'red' }} variant='danger'>{error}</Alert>}
 
-                    <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} >
+                    <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
                         Log In
                     </Button>
                     <Grid container>

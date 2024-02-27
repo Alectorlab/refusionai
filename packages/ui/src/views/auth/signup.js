@@ -11,7 +11,6 @@ import { useUserAuth } from 'context/UserAuthContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { Alert } from 'react-bootstrap'
 
-
 export default function SignupView() {
 
     const [error, setError] = useState('')
@@ -23,12 +22,11 @@ export default function SignupView() {
         const data = new FormData(event.currentTarget)
 
         try {
-            await signUp(data.get('email'), data.get('password'),)
+            await signUp(data.get('email'), data.get('password'))
             navigate('/login')
         } catch (err) {
             setError(err.message)
         }
-
     }
 
     return (
@@ -44,12 +42,12 @@ export default function SignupView() {
                     <TextField margin='normal' required fullWidth name='password' label='Confirm Password' type='password' id='password' autoComplete='current-password' />
                     <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
                     {error && <Alert style={{ color: 'red' }} variant='danger'>{error}</Alert>}
-                    <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} >
+                    <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
                         Refusion AI Sign Up
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link style={{ color: '#1695ec' }} to='/login' >
+                            <Link style={{ color: '#1695ec' }} to='/login'>
                                 {'Already have an account? Login'}
                             </Link>
                         </Grid>
