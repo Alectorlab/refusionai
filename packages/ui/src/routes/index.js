@@ -1,5 +1,6 @@
 import { useRoutes, Navigate } from 'react-router-dom'
 import { lazy } from 'react'
+import PropTypes from 'prop-types'
 
 import Loadable from 'ui-component/loading/Loadable'
 
@@ -22,22 +23,36 @@ function PrivateRoute({ children }) {
     return auth ? children : <Navigate to='/login' />
 }
 
+PrivateRoute.propTypes = {
+    children: PropTypes.node.isRequired,
+}
+
 function OpenRoutes({ children }) {
     const { isAuth } = useUserAuth()
     const auth = isAuth
     return !auth ? children : <Navigate to='/' />
 }
 
+OpenRoutes.propTypes = {
+    children: PropTypes.node.isRequired,
+}
+
 const LoginRoute = {
     path: '/login',
-    element: <OpenRoutes>
-        <LoginView />
-    </OpenRoutes>,
+    element: (
+        <OpenRoutes>
+            <LoginView />
+        </OpenRoutes>
+    ),
 }
 
 const SignupRoute = {
     path: '/signup',
-    element: <OpenRoutes><SignupView /></OpenRoutes>,
+    element: (
+        <OpenRoutes>
+            <SignupView />
+        </OpenRoutes>
+    ),
 }
 
 // ==============================|| ROUTING RENDER ||============================== //
