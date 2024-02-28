@@ -56,5 +56,9 @@
     },
     "resolutions": {
         "@qdrant/openapi-typescript-fetch": "1.2.1"
+    },
+    "dependencies": {
+        "firebase": "^10.8.0",
+        "react-bootstrap": "^2.10.1"
     }
 }
