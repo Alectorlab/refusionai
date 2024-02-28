@@ -285,7 +285,7 @@ const EmbedChat = ({ chatflowid }) => {
                                 Paste this anywhere in the <code>{`<body>`}</code> tag of your html file.
                                 <p>
                                     You can also specify a&nbsp;
-                                    <a rel='noreferrer' target='_blank' href='https://refusion.ai' >
+                                    <a rel='noreferrer' target='_blank' href='https://refusion.ai'>
                                         version
                                     </a>
                                     :&nbsp;<code>{`https://cdn.jsdelivr.net/gh/Alectorlab/RefusionChatEmbed@latest/dist/web.js`}</code>
