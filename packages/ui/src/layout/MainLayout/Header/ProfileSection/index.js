@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 
 // material-ui
 import { useTheme } from '@mui/material/styles'
@@ -25,10 +27,19 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 // project imports
 import MainCard from 'ui-component/cards/MainCard'
 import Transitions from 'ui-component/extended/Transitions'
+import { BackdropLoader } from 'ui-component/loading/BackdropLoader'
 import AboutDialog from 'ui-component/dialog/AboutDialog'
 
+import { Logout } from '@mui/icons-material'
+import { useUserAuth } from "context/UserAuthContext"
+
 // assets
-import { IconLogout, IconSettings, IconInfoCircle } from '@tabler/icons'
+import { IconLogout, IconSettings, IconFileExport, IconFileDownload, IconInfoCircle, } from '@tabler/icons'
+
+// API
+import databaseApi from 'api/database'
+
+import { SET_MENU } from 'store/actions'
 
 import './index.css'
 
@@ -36,13 +47,18 @@ import './index.css'
 
 const ProfileSection = ({ username, handleLogout }) => {
     const theme = useTheme()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { onLogoutHandler } = useUserAuth()
 
     const customization = useSelector((state) => state.customization)
 
     const [open, setOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [aboutDialogOpen, setAboutDialogOpen] = useState(false)
 
     const anchorRef = useRef(null)
+    const uploadRef = useRef(null)
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -53,6 +69,56 @@ const ProfileSection = ({ username, handleLogout }) => {
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen)
+    }
+
+    const handleExportDB = async () => {
+        setOpen(false)
+        try {
+            const response = await databaseApi.getExportDatabase()
+            const exportItems = response.data
+            let dataStr = JSON.stringify(exportItems)
+            let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr)
+
+            let exportFileDefaultName = `DB.json`
+
+            let linkElement = document.createElement('a')
+            linkElement.setAttribute('href', dataUri)
+            linkElement.setAttribute('download', exportFileDefaultName)
+            linkElement.click()
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    const handleFileUpload = (e) => {
+        if (!e.target.files) return
+
+        const file = e.target.files[0]
+        const reader = new FileReader()
+        reader.onload = async (evt) => {
+            if (!evt?.target?.result) {
+                return
+            }
+            const { result } = evt.target
+
+            if (result.includes(`"chatmessages":[`) && result.includes(`"chatflows":[`) && result.includes(`"apikeys":[`)) {
+                dispatch({ type: SET_MENU, opened: false })
+                setLoading(true)
+
+                try {
+                    await databaseApi.createLoadDatabase(JSON.parse(result))
+                    setLoading(false)
+                    navigate('/', { replace: true })
+                    navigate(0)
+                } catch (e) {
+                    console.error(e)
+                    setLoading(false)
+                }
+            } else {
+                alert('Incorrect Refusion Database Format')
+            }
+        }
+        reader.readAsText(file)
     }
 
     const prevOpen = useRef(open)
@@ -139,6 +205,27 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     onClick={() => {
                                                         setOpen(false)
+                                                        uploadRef.current.click()
+                                                    }}
+                                                >
+                                                    <ListItemIcon>
+                                                        <IconFileDownload stroke={1.5} size='1.3rem' />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={<Typography variant='body2'>Load Database</Typography>} />
+                                                </ListItemButton>
+                                                <ListItemButton
+                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                    onClick={handleExportDB}
+                                                >
+                                                    <ListItemIcon>
+                                                        <IconFileExport stroke={1.5} size='1.3rem' />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={<Typography variant='body2'>Export Database</Typography>} />
+                                                </ListItemButton>
+                                                <ListItemButton
+                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                    onClick={() => {
+                                                        setOpen(false)
                                                         setAboutDialogOpen(true)
                                                     }}
                                                 >
@@ -146,6 +233,17 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                         <IconInfoCircle stroke={1.5} size='1.3rem' />
                                                     </ListItemIcon>
                                                     <ListItemText primary={<Typography variant='body2'>About Refusion</Typography>} />
+                                                </ListItemButton>
+                                                <ListItemButton
+                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                    onClick={() => {
+                                                        onLogoutHandler()
+                                                    }}
+                                                >
+                                                    <ListItemIcon>
+                                                        <Logout />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={<Typography variant='body2' sx={{ fontWeight: "500" }} >Log out</Typography>} />
                                                 </ListItemButton>
                                                 {localStorage.getItem('username') && localStorage.getItem('password') && (
                                                     <ListItemButton
@@ -167,6 +265,8 @@ const ProfileSection = ({ username, handleLogout }) => {
                     </Transitions>
                 )}
             </Popper>
+            <input ref={uploadRef} type='file' hidden accept='.json' onChange={(e) => handleFileUpload(e)} />
+            <BackdropLoader open={loading} />
             <AboutDialog show={aboutDialogOpen} onCancel={() => setAboutDialogOpen(false)} />
         </>
     )
