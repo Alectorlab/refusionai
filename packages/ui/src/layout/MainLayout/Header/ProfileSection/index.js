@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-
 // material-ui
 import { useTheme } from '@mui/material/styles'
 import {
@@ -31,10 +30,10 @@ import { BackdropLoader } from 'ui-component/loading/BackdropLoader'
 import AboutDialog from 'ui-component/dialog/AboutDialog'
 
 import { Logout } from '@mui/icons-material'
-import { useUserAuth } from "context/UserAuthContext"
+import { useUserAuth } from 'context/UserAuthContext'
 
 // assets
-import { IconLogout, IconSettings, IconFileExport, IconFileDownload, IconInfoCircle, } from '@tabler/icons'
+import { IconLogout, IconSettings, IconInfoCircle } from '@tabler/icons'
 
 // API
 import './index.css'
@@ -164,7 +163,13 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                     <ListItemIcon>
                                                         <Logout />
                                                     </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant='body2' sx={{ fontWeight: "500" }} >Log out</Typography>} />
+                                                    <ListItemText
+                                                        primary={
+                                                            <Typography variant='body2' sx={{ fontWeight: '500' }} >
+                                                                Log out
+                                                            </Typography>
+                                                        } 
+                                                    />
                                                 </ListItemButton>
                                                 {localStorage.getItem('username') && localStorage.getItem('password') && (
                                                     <ListItemButton
