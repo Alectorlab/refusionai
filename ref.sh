@@ -2,8 +2,8 @@
 
 echo "Starting Refusion.ai..."
 
-cd /home/ubuntu/project/refusion
-echo "/home/ubuntu/project/refusion"
+cd /home/ubuntu/beta/refusionai
+echo "/home/ubuntu/beta/refusionai"
 
 #export NVM_DIR=$HOME/.nvm;
 #source $NVM_DIR/nvm.sh;
