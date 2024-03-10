@@ -165,10 +165,10 @@ const ProfileSection = ({ username, handleLogout }) => {
                                                     </ListItemIcon>
                                                     <ListItemText
                                                         primary={
-                                                            <Typography variant='body2' sx={{ fontWeight: '500' }} >
+                                                            <Typography variant='body2' sx={{ fontWeight: '500' }}>
                                                                 Log out
                                                             </Typography>
-                                                        } 
+                                                        }
                                                     />
                                                 </ListItemButton>
                                                 {localStorage.getItem('username') && localStorage.getItem('password') && (
