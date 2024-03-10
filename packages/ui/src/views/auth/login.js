@@ -27,7 +27,10 @@ export default function LoginView() {
         })
         setError('')
         try {
-            await logIn(data.get('email'), data.get('password'))
+            const response = await logIn(data.get('email'), data.get('password'))
+            if (!response?.user?.emailVerified) {
+                setError('notVerified')
+            }
             onLoginHandler()
             navigate('/')
         } catch (err) {
@@ -46,7 +49,8 @@ export default function LoginView() {
                     marginTop: 8,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    backgroundColor: '#f5f5f5'
                 }}
             >
                 <Typography component='h1' variant='h1'>
@@ -66,11 +70,12 @@ export default function LoginView() {
                     />
                     <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
 
-                    {error && (
-                        <Alert style={{ color: 'red' }} variant='danger'>
-                            {error}
-                        </Alert>
-                    )}
+                    {error && error !== 'notVerified' && <Alert style={{ color: 'red' }} variant='danger'>{error}</Alert>}
+                    {error && error === 'notVerified' && <div>
+                        <Alert style={{ color: 'red' }} variant='danger'>Please confirm your email by checking the email we sent you earlier.</Alert>
+
+                    </div>
+                    }
 
                     <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
                         Log In
@@ -78,7 +83,7 @@ export default function LoginView() {
                     <Grid container>
                         <Grid item>
                             <Link to='/signup' variant='body2'>
-                                {"Don't have an account? Sign Up"}
+                                {'Don't have an account? Sign Up'}
                             </Link>
                         </Grid>
                     </Grid>

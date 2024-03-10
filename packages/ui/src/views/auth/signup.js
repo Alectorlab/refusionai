@@ -39,7 +39,8 @@ export default function SignupView() {
                     marginTop: 8,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    backgroundColor: '#f5f5f5'
                 }}
             >
                 <Typography component='h1' variant='h1'>
@@ -73,7 +74,7 @@ export default function SignupView() {
                             {error}
                         </Alert>
                     )}
-                    <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
+                    <Button type='submit' fullWidth variant='contained' color='primary' sx={{ mt: 3, mb: 2 }}>
                         Refusion AI Sign Up
                     </Button>
                     <Grid container>
