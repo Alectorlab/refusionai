@@ -70,10 +70,14 @@ export default function LoginView() {
                     />
                     <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
 
-                    {error && error !== 'notVerified' && <Alert style={{ color: 'red' }} variant='danger'>{error}</Alert>}
+                    {error && error !== 'notVerified' &&
+                        <Alert style={{ color: 'red' }} variant='danger'>
+                            {error}
+                        </Alert>}
                     {error && error === 'notVerified' && <div>
-                        <Alert style={{ color: 'red' }} variant='danger'>Please confirm your email by checking the email we sent you earlier.</Alert>
-
+                        <Alert style={{ color: 'red' }} variant='danger'>
+                            Please confirm your email by checking the email we sent you earlier.
+                        </Alert>
                     </div>
                     }
 

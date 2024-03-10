@@ -16,9 +16,8 @@ const userAuthContext = createContext()
 const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: 'http://54.183.178.68:8081/',
+    url: 'http://54.183.178.68:8081/'
     // This must be true.
-
 }
 
 export function UserAuthContextProvider({ children }) {
